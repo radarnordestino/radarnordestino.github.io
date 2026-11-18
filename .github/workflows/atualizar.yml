@@ -1,0 +1,60 @@
+name: Atualizar dados do Radar Nordestino (13 Cidades)
+
+on:
+  schedule:
+    # Roda todo dia às 04:15 da manhã (horário de Brasília / 07:15 UTC)
+    - cron: '15 7 * * *'
+  workflow_dispatch:
+    inputs:
+      cidade:
+        description: 'Slug da cidade específica (vazio = atualizar todas as 13 cidades)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependências de geração de imagem
+        run: pip install --quiet Pillow
+
+      - name: Coletar dados oficiais por cidade com isolamento de falhas
+        run: |
+          if [ -n "${{ github.event.inputs.cidade }}" ]; then
+            python3 coletar.py --cidade "${{ github.event.inputs.cidade }}"
+          else
+            for CIDADE in salvador saoluis maceio aracaju caruaru petrolina campinagrande maracanau mossoro patos cruzdasalmas irece santoantoniodejesus; do
+              echo "::group::Coletando $CIDADE"
+              python3 coletar.py --cidade "$CIDADE" || echo "::warning::Coleta de $CIDADE falhou ou Câmara indisponível; mantendo dados.js anterior intacto."
+              echo "::endgroup::"
+            done
+          fi
+
+      - name: Publicar atualização se houver mudanças
+        env:
+          GIT_AUTHOR_NAME: "Radar Nordestino"
+          GIT_AUTHOR_EMAIL: "noreply@radarnordestino.github.io"
+          GIT_COMMITTER_NAME: "Radar Nordestino"
+          GIT_COMMITTER_EMAIL: "noreply@radarnordestino.github.io"
+        run: |
+          git config user.name "Radar Nordestino"
+          git config user.email "noreply@radarnordestino.github.io"
+          if git diff --quiet; then
+            echo "Sem alterações nos portais."
+          else
+            git add index.html logo.png card-whatsapp.jpg */dados.js */index.html */logo.png */card-whatsapp.jpg */fotos/
+            git commit -m "chore: atualizar dados das Câmaras ($(date -u +'%Y-%m-%d'))"
+            git push
+          fi
