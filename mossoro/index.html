@@ -6,14 +6,14 @@
 <title>Radar Mossoró — O que os 21 vereadores e o Prefeito realmente fazem</title>
 <meta name="description" content="Consulte seu bairro em Mossoró, veja quem faz leis de verdade, quem só vota junto e quanto cada vereador gastou nas eleições (dados oficiais Câmara + TSE).">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://radarcidadao.github.io/radarnordestino.github.io/mossoro/">
+<meta property="og:url" content="https://radarnordestino.github.io/mossoro/">
 <meta property="og:title" content="Radar Mossoró — O que os 21 vereadores e o Prefeito fazem?">
 <meta property="og:description" content="Raio-X dos 21 vereadores e do Prefeito de Mossoró: salários em tempo real, gastos de campanha (R$ 1,17 mi em 2024 no TSE) e canais oficiais de cobrança.">
-<meta property="og:image" content="https://radarcidadao.github.io/radarnordestino.github.io/mossoro/card-whatsapp.jpg">
+<meta property="og:image" content="https://radarnordestino.github.io/mossoro/card-whatsapp.jpg">
 <meta property="og:image:width" content="1080">
 <meta property="og:image:height" content="1080">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://radarcidadao.github.io/radarnordestino.github.io/mossoro/card-whatsapp.jpg">
+<meta name="twitter:image" content="https://radarnordestino.github.io/mossoro/card-whatsapp.jpg">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="../favicon.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
@@ -842,7 +842,7 @@ const repHTML=g=>`<button class="rp" type="button" data-g="${D.rep.indexOf(g)}">
   <span class="rr">${esc(g.r)}</span><span class="rb">${esc(g.b||CIDADE)}</span>
   <span class="rm"><span class="lab">${esc(THX[g.th]?THX[g.th][1]:'Melhoria')}</span><span>${g.a} ${g.a===1?'vereador pediu':'vereadores pediram'}</span><span>·</span><span>de ${mesAno(g.d0)} a ${mesAno(g.d1)}</span></span><span class="go" style="grid-column:1/-1;color:var(--red);font-weight:700;font-size:14px;margin-top:6px">Ver pedidos e cobrar →</span></button>`;
 const TEMA={luz:'iluminação',asf:'conserto de asfalto',tra:'melhoria no trânsito',agu:'conserto de água e esgoto',lim:'limpeza e poda',cal:'conserto de calçada',laz:'melhoria em praça e área de lazer',sau:'melhoria na saúde',edu:'melhoria em escola',seg:'segurança',bus:'melhoria no ônibus'};
-const SITE=/^https?:/.test(location.protocol)?location.origin+location.pathname:'https://radarcidadao.github.io/radarnordestino.github.io/mossoro/';
+const SITE=/^https?:/.test(location.protocol)?location.origin+location.pathname:'https://radarnordestino.github.io/mossoro/';
 function openRep(g){
   openSheet('b',THX[g.th]?THX[g.th][2]:'pin',g.r,`${THX[g.th]?THX[g.th][1]:'Melhoria'} · pedido ${g.n} vezes até agora${g.b?' · '+g.b:''}`);
   const cnt=new Map(); g.items.forEach(it=>it[6].forEach(a=>cnt.set(a,(cnt.get(a)||0)+1)));
