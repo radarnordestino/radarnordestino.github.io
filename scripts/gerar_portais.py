@@ -15,7 +15,7 @@ import sys
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-BASE_ORIGIN = os.environ.get("RADAR_ORIGIN", "https://radarnordestino.github.io").rstrip("/")
+BASE_ORIGIN = os.environ.get("RADAR_ORIGIN", "https://radarcidadao.github.io/radarnordestino.github.io").rstrip("/")
 
 CITY_NAV_ORDER = [
     ("salvador", "Salvador", 43),
